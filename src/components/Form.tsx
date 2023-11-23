@@ -3,19 +3,19 @@ import Button from "./Button"
 
 export default function Form() {
   const [formInfo, setFormInfo] = useState({
-    servico: '',
+    usuario: '',
     login: '',
     senha: '',
-    url: ''
+    checked: false
   })
   const [errorMessage, setErrorMessage] = useState<string[]>([]);
   
   function clearState() {
     setFormInfo({
-      servico: '',
+      usuario: '',
       login: '',
       senha: '',
-      url: ''
+      checked: false
     })
   }
 
@@ -23,14 +23,14 @@ export default function Form() {
     const errors = [];
     const regex = /^(?=.*?[0-9])/i;
 
-    if (formInfo.servico === '') errors.push('O campo serviço é Obrigatorio');
+    if (formInfo.usuario === '') errors.push('O campo serviço é Obrigatorio');
     if (formInfo.login === '') errors.push('O campo login é Obrigatorio');
 
     if (!regex.test(formInfo.senha)) errors.push(
       'O campo senha deve possuir letras maiusculas números e caracteres'
       );
     if (formInfo.senha === '') errors.push('O campo senha é Obrigatorio');
-    if (formInfo.url === '') errors.push('O campo URL é Obrigatorio');
+    if (formInfo.checked === false) errors.push('O termo de uso é Obrigatorio');
     setErrorMessage(errors);
     return errors.length === 0;
   }
@@ -57,15 +57,18 @@ export default function Form() {
       <form onSubmit={ (event) => handleSubmit(event) } >
         <fieldset>
           <label>
-            Nome do serviço
+            Nome do usuario
                 <input
-                  value={ formInfo.servico }
-                  name="servico"
+                  value={ formInfo.usuario }
+                  name="usuario"
                   onChange={ (event) => handleChange(event) }
                   type="text"
+                  placeholder="digite seu nome"
                 />
           </label>
+          </fieldset>
 
+          <fieldset>
           <label>
             Login
                 <input
@@ -73,9 +76,12 @@ export default function Form() {
                   name="login"
                   onChange={ handleChange }
                   type="text"
+                  placeholder="digite seu login"
                 />
           </label>
+          </fieldset>
 
+          <fieldset>
           <label>
             Senha
                 <input
@@ -84,18 +90,22 @@ export default function Form() {
                   onChange={ handleChange }
                   maxLength={ 20 }
                   type="password"
+                  placeholder="digite sua senha"
                 />
           </label>
+          </fieldset>
 
+          <fieldset>
           <label>
-            URL
+          termos de uso e política de privacidade
                 <input
-                  value={ formInfo.url }
+                  value={ formInfo.checked }
                   name="url"
                   onChange={ handleChange }
-                  type="text"
+                  type="checkbox"
                 />
           </label>
+          </fieldset>
 
           {
             errorMessage && (
@@ -110,8 +120,10 @@ export default function Form() {
           <Button>Cadastrar</Button>
           <Button onClick={ () => clearState() } >Limpar</Button>
 
-        </fieldset>
       </form>
+      <h3>{ formInfo.usuario }</h3>
+      <h3>{ formInfo.login }</h3>
+      <h3>{ formInfo.senha }</h3>
     </div>
   )
 }
