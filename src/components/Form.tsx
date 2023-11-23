@@ -55,7 +55,7 @@ export default function Form() {
       setErrorMessage([]);
       clearState();
 
-      Swal.fire("Usuario cadastrado com sucesso!");
+      Swal.fire("Usuário cadastrado com sucesso!");
     }
   }
 
@@ -105,7 +105,7 @@ export default function Form() {
 
           <fieldset>
           <label>
-          termos de uso e política de privacidade
+            termos de uso e política de privacidade
                 <input
                   name="checkbox"
                   type="checkbox"
@@ -125,8 +125,10 @@ export default function Form() {
               </div>
             )
           }
+        <div className="container-button">
           <Button>Cadastrar</Button>
           <Button onClick={ () => clearState() } >Limpar</Button>
+        </div>
 
       </form>
     </div>
