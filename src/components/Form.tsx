@@ -9,6 +9,9 @@ export default function Form() {
     senha: '',
     checkbox: false
   })
+  const [passwordShow, setPasswordShow] = useState({
+    checked: false
+  });
   const [errorMessage, setErrorMessage] = useState<string[]>([]);
 
   function clearState() {
@@ -47,6 +50,10 @@ export default function Form() {
       ...formInfo,
       [name]: value,
     });
+    setPasswordShow({
+      ...passwordShow,
+      [name]: value,
+    })
   }
 
   function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
@@ -97,8 +104,15 @@ export default function Form() {
                   onChange={ handleChange }
                   minLength={ 0 }
                   maxLength={ 20 }
-                  type="password"
+                  type={passwordShow.checked ? 'text' : 'password'}
                   placeholder="digite sua senha"
+                />
+                Mostrar senha
+                 <input
+                  name="checked"
+                  type="checkbox"
+                  checked={ passwordShow.checked }
+                  onChange={ (event) => handleChange(event) }
                 />
           </label>
           </fieldset>
