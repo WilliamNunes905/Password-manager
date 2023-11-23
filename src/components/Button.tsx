@@ -2,7 +2,7 @@ import React from "react"
 
 type ButtonType = {
     children: React.ReactNode,
-    onClick?: () => void,
+    onClick?: (event: any) => void,
 }
 
 export default function Button({ children, onClick }: ButtonType) {

@@ -1,21 +1,22 @@
 import React, { useState } from "react"
 import Button from "./Button"
+import Swal from 'sweetalert2'
 
 export default function Form() {
   const [formInfo, setFormInfo] = useState({
     usuario: '',
     login: '',
     senha: '',
-    checked: false
+    checkbox: false
   })
   const [errorMessage, setErrorMessage] = useState<string[]>([]);
-  
+
   function clearState() {
     setFormInfo({
       usuario: '',
       login: '',
       senha: '',
-      checked: false
+      checkbox: false
     })
   }
 
@@ -30,14 +31,18 @@ export default function Form() {
       'O campo senha deve possuir letras maiusculas números e caracteres'
       );
     if (formInfo.senha === '') errors.push('O campo senha é Obrigatorio');
-    if (formInfo.checked === false) errors.push('O termo de uso é Obrigatorio');
+    if (formInfo.checkbox === false) errors.push('O termo de uso é Obrigatorio');
     setErrorMessage(errors);
     return errors.length === 0;
   }
 
 
-  function handleChange(event: React.ChangeEvent<HTMLInputElement> ) {
-    const { name, value } = event.target;
+  function handleChange(event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement> ) {
+    const { name, type } = event.target;
+
+    const value = type === 'checkbox'
+    ? (event.target as HTMLInputElement).checked : event.target.value;
+
     setFormInfo({
       ...formInfo,
       [name]: value,
@@ -49,12 +54,14 @@ export default function Form() {
     if (validateForm()) {
       setErrorMessage([]);
       clearState();
+
+      Swal.fire("Usuario cadastrado com sucesso!");
     }
   }
 
   return (
     <div>
-      <form onSubmit={ (event) => handleSubmit(event) } >
+      <form onSubmit={ (event) => handleSubmit(event) }>
         <fieldset>
           <label>
             Nome do usuario
@@ -76,7 +83,7 @@ export default function Form() {
                   name="login"
                   onChange={ handleChange }
                   type="text"
-                  placeholder="digite seu login"
+                  placeholder="digite seu E-mail"
                 />
           </label>
           </fieldset>
@@ -88,6 +95,7 @@ export default function Form() {
                   value={ formInfo.senha }
                   name="senha"
                   onChange={ handleChange }
+                  minLength={ 0 }
                   maxLength={ 20 }
                   type="password"
                   placeholder="digite sua senha"
@@ -99,10 +107,10 @@ export default function Form() {
           <label>
           termos de uso e política de privacidade
                 <input
-                  value={ formInfo.checked }
-                  name="url"
-                  onChange={ handleChange }
+                  name="checkbox"
                   type="checkbox"
+                  checked={ formInfo.checkbox }
+                  onChange={ (event) => handleChange(event) }
                 />
           </label>
           </fieldset>
@@ -121,9 +129,6 @@ export default function Form() {
           <Button onClick={ () => clearState() } >Limpar</Button>
 
       </form>
-      <h3>{ formInfo.usuario }</h3>
-      <h3>{ formInfo.login }</h3>
-      <h3>{ formInfo.senha }</h3>
     </div>
   )
 }
