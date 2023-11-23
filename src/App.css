@@ -1,8 +1,13 @@
 .valid-password-check {
-    color: #aeffb6;
-  }
-  
-  .invalid-password-check {
-    color: #f58989;
-  }
-  
+  color: #aeffb6;
+}
+
+.invalid-password-check {
+  color: #f58989;
+}
+
+.container-header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
