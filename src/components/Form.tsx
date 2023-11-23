@@ -1,38 +1,41 @@
+import Button from "./Button"
+
 export default function Form() {
   return (
     <div>
       <form>
-
-        <label>
+        <fieldset>
+          <label>
             Nome do serviço
                 <input
                   type="text"
                 />
-        </label>
+          </label>
 
-        <label>
+          <label>
             Login
                 <input
                   type="text"
                 />
-        </label>
+          </label>
 
-        <label>
+          <label>
             Senha
                 <input
                   type="password"
                 />
-        </label>
+          </label>
 
-        <label>
+          <label>
             URL
                 <input
                   type="text"
                 />
-        </label>
+          </label>
 
-        <button>Cadastrar</button>
-        <button>Cancelar</button>
+          <Button>Cadastrar</Button>
+          <Button>Limpar</Button>
+        </fieldset>
       </form>
     </div>
   )
