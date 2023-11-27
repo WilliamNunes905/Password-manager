@@ -1,13 +1,16 @@
-import Header from './components/Header'
-import Form from './components/Form'
-import './App.css'
+import { Route, Routes } from 'react-router-dom';
+import Form from './components/Form';
+import Perfil from './components/Perfil';
+import './App.css';
 
 function App() {
   
   return (
     <>
-    <Header />
-    <Form />
+      <Routes>
+        <Route path='/' element={ <Form /> } />
+        <Route path='/perfil' element={ <Perfil /> } />  
+      </Routes>   
     </>
   )
 }

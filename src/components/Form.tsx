@@ -1,8 +1,11 @@
 import React, { useState } from "react"
 import Button from "./Button"
+import Header from './Header';
 import Swal from 'sweetalert2'
+import { useNavigate } from 'react-router-dom';
 
 export default function Form() {
+  const naviGate = useNavigate();
   const [formInfo, setFormInfo] = useState({
     usuario: '',
     login: '',
@@ -61,7 +64,7 @@ export default function Form() {
     if (validateForm()) {
       setErrorMessage([]);
       clearState();
-
+      naviGate('/perfil');
       Swal.fire("Usuário cadastrado com sucesso!");
     }
   }
@@ -69,6 +72,7 @@ export default function Form() {
   return (
     <div>
       <form onSubmit={ (event) => handleSubmit(event) }>
+      <Header />
         <fieldset>
           <label>
             Nome do usuario
