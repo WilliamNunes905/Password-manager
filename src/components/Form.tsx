@@ -6,6 +6,7 @@ import { useNavigate } from 'react-router-dom';
 
 export default function Form() {
   const naviGate = useNavigate();
+  
   const [formInfo, setFormInfo] = useState({
     usuario: '',
     login: '',
@@ -64,7 +65,7 @@ export default function Form() {
     if (validateForm()) {
       setErrorMessage([]);
       clearState();
-      naviGate('/perfil');
+      naviGate('/perfil', { state: formInfo });
       Swal.fire("Usuário cadastrado com sucesso!");
     }
   }
