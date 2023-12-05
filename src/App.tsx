@@ -1,6 +1,6 @@
 import { Route, Routes } from 'react-router-dom';
-import Form from './components/Form';
-import Perfil from './components/Perfil';
+import Form from './components/form';
+import Perfil from './components/perfil';
 import './App.css';
 
 function App() {

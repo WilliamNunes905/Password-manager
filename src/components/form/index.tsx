@@ -1,8 +1,10 @@
 import React, { useState } from "react"
-import Button from "./Button"
-import Header from './Header';
+import Button from "../button"
+import Header from '../header';
 import Swal from 'sweetalert2'
 import { useNavigate } from 'react-router-dom';
+import styles from '../button/button.module.css';
+import style from './form.module.css';
 
 export default function Form() {
   const naviGate = useNavigate();
@@ -72,10 +74,12 @@ export default function Form() {
 
   return (
     <div>
-      <form onSubmit={ (event) => handleSubmit(event) }>
+      <form
+        onSubmit={ (event) => handleSubmit(event) }
+        className={ style.form }
+        >
       <Header />
-        <fieldset>
-          <label>
+          <label className={ style.label }>
             Nome do usuario
                 <input
                   value={ formInfo.usuario }
@@ -83,11 +87,10 @@ export default function Form() {
                   onChange={ (event) => handleChange(event) }
                   type="text"
                   placeholder="digite seu nome"
+                  className={ style.input }
                 />
           </label>
-          </fieldset>
 
-          <fieldset>
           <label>
             Login
                 <input
@@ -98,9 +101,7 @@ export default function Form() {
                   placeholder="digite seu E-mail"
                 />
           </label>
-          </fieldset>
 
-          <fieldset>
           <label>
             Senha
                 <input
@@ -120,9 +121,7 @@ export default function Form() {
                   onChange={ (event) => handleChange(event) }
                 />
           </label>
-          </fieldset>
 
-          <fieldset>
           <label>
             termos de uso e política de privacidade
                 <input
@@ -132,11 +131,10 @@ export default function Form() {
                   onChange={ (event) => handleChange(event) }
                 />
           </label>
-          </fieldset>
 
           {
             errorMessage && (
-              <div className="invalid-password-check">
+              <div className={ style.invalidPassword }>
                 {errorMessage.map(message => (
                   <p key={message} >{message}</p>
                 ))
@@ -144,11 +142,10 @@ export default function Form() {
               </div>
             )
           }
-        <div className="container-button">
+        <div className={ styles.button }>
           <Button>Cadastrar</Button>
           <Button onClick={ () => clearState() } >Limpar</Button>
         </div>
-
       </form>
     </div>
   )
